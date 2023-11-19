@@ -32,14 +32,14 @@ function updateDataToStorage() {
     if (isStorageExist()) saveData();
 }
 
-function buatObjekBuku(judul, penulis, tahun, waktu, selesai) {
+function buatObjekBuku(tittle, author, year, time, isComplete) {
     return {
         id: +new Date(),
-        judul,
-        penulis,
-        tahun,
-        waktu,
-        selesai,
+        tittle,
+        author,
+        year,
+        time,
+        isComplete,
     };
 }
 
@@ -77,11 +77,11 @@ function refreshDataFromList() {
 
     function addBookToList(book, listElement) {
         const bukuBaru = buatListBaca(
-            book.judul,
-            book.penulis,
-            book.tahun,
-            book.waktu,
-            book.selesai,
+            book.tittle,
+            book.author,
+            book.year,
+            book.time,
+            book.isComplete,
         );
         bukuBaru[ID_BUKU] = book.id;
         listElement.append(bukuBaru);
@@ -123,21 +123,4 @@ function refreshDataFromList() {
             }
         }
     }
-}
-
-function hapusSemuaBuku() {
-    const listBelumBaca = document.getElementById(ID_LIST_BELUM);
-    const listSudahBaca = document.getElementById(ID_LIST_SUDAH);
-
-    while (listBelumBaca.firstChild) {
-        listBelumBaca.removeChild(listBelumBaca.firstChild);
-    }
-
-    while (listSudahBaca.firstChild) {
-        listSudahBaca.removeChild(listSudahBaca.firstChild);
-    }
-
-    list = [];
-
-    updateDataToStorage();
 }

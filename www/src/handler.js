@@ -270,3 +270,20 @@ function searchBooksInList(bookList, searchTerm) {
         }
     }
 }
+
+function hapusSemuaBuku() {
+    const listBelumBaca = document.getElementById(ID_LIST_BELUM);
+    const listSudahBaca = document.getElementById(ID_LIST_SUDAH);
+
+    while (listBelumBaca.firstChild) {
+        listBelumBaca.removeChild(listBelumBaca.firstChild);
+    }
+
+    while (listSudahBaca.firstChild) {
+        listSudahBaca.removeChild(listSudahBaca.firstChild);
+    }
+
+    list = [];
+
+    updateDataToStorage();
+}
