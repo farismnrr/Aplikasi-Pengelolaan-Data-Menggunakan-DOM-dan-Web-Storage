@@ -90,26 +90,23 @@ function buatTombol(buttonTypeClass, eventListener) {
 }
 
 function tambahBukuSelesai(elemenBuku) {
-    const judulBuku = elemenBuku.querySelector('.judul-buku').innerText;
-    const penulisBuku = elemenBuku.querySelector('.penulis-buku').innerText;
-    const tahunBuku = elemenBuku.querySelector('.tahun-buku').innerText;
-    const waktuBuku = elemenBuku.querySelector('.waktu-buku').innerText;
+    const judul = elemenBuku.querySelector('.judul-buku').innerText;
+    const penulis = elemenBuku.querySelector('.penulis-buku').innerText;
+    const tahun = elemenBuku.querySelector('.tahun-buku').innerText;
+    const waktu = elemenBuku.querySelector('.waktu-buku').innerText;
+    const listSudahBaca = document.getElementById(ID_LIST_SUDAH);
 
-    const bukuBaru = buatListBaca(
-        judulBuku,
-        penulisBuku,
-        tahunBuku,
-        waktuBuku,
-        true,
-    );
+    const listBaca = buatListBaca(judul, penulis, tahun, waktu, true);
+    const objekBuku = buatObjekBuku(judul, penulis, tahun, waktu, true);
 
-    const listSelesai = document.getElementById(ID_LIST_SUDAH);
-    const book = cariBuku(elemenBuku[ID_BUKU]);
-    book.selesai = true;
-    bukuBaru[ID_BUKU] = book.id;
-    listSelesai.append(bukuBaru);
+    listBaca[ID_BUKU] = objekBuku.id;
+    list.push(objekBuku);
+    listSudahBaca.append(listBaca);
     elemenBuku.remove();
+    hapusBukuSelesai(elemenBuku);
+
     updateDataToStorage();
+    tombolKembali();
 }
 
 function hapusBukuSelesai(elemenBuku) {
@@ -170,27 +167,23 @@ function buatTombolEdit() {
 }
 
 function undoBukuSelesai(elemenBuku) {
-    const judulBuku = elemenBuku.querySelector('.judul-buku').innerText;
-    const penulisBuku = elemenBuku.querySelector('.penulis-buku').innerText;
-    const tahunBuku = elemenBuku.querySelector('.tahun-buku').innerText;
-    const waktuBuku = elemenBuku.querySelector('.waktu-buku').innerText;
-
-    const bukuBaru = buatListBaca(
-        judulBuku,
-        penulisBuku,
-        tahunBuku,
-        waktuBuku,
-        false,
-    );
+    const judul = elemenBuku.querySelector('.judul-buku').innerText;
+    const penulis = elemenBuku.querySelector('.penulis-buku').innerText;
+    const tahun = elemenBuku.querySelector('.tahun-buku').innerText;
+    const waktu = elemenBuku.querySelector('.waktu-buku').innerText;
     const listBelumBaca = document.getElementById(ID_LIST_BELUM);
 
-    const book = cariBuku(elemenBuku[ID_BUKU]);
-    book.selesai = false;
-    bukuBaru[ID_BUKU] = book.id;
-    listBelumBaca.append(bukuBaru);
+    const listBaca = buatListBaca(judul, penulis, tahun, waktu, false);
+    const objekBuku = buatObjekBuku(judul, penulis, tahun, waktu, false);
+
+    listBaca[ID_BUKU] = objekBuku.id;
+    list.push(objekBuku);
+    listBelumBaca.append(listBaca);
     elemenBuku.remove();
+    hapusBukuSelesai(elemenBuku);
 
     updateDataToStorage();
+    tombolKembali();
 }
 
 function editInfoBuku(elemenBuku) {
@@ -306,4 +299,68 @@ function hapusSemuaBuku() {
     list = [];
 
     updateDataToStorage();
+}
+
+function refreshDataFromList() {
+    const listBelumSelesai = document.getElementById(ID_LIST_BELUM);
+    const listSelesai = document.getElementById(ID_LIST_SUDAH);
+    const buttonBelumSelesai = document.getElementById('chk1');
+    const buttonSelesai = document.getElementById('chk2');
+
+    const isButtonBelumSelesaiChecked =
+        localStorage.getItem('isButtonBelumSelesaiChecked') === 'true';
+    const isButtonSelesaiChecked =
+        localStorage.getItem('isButtonSelesaiChecked') === 'true';
+
+    buttonBelumSelesai.checked = isButtonBelumSelesaiChecked;
+    buttonSelesai.checked = isButtonSelesaiChecked;
+
+    function addBookToList(book, listElement) {
+        const bukuBaru = buatListBaca(
+            book.tittle,
+            book.author,
+            book.year,
+            book.time,
+            book.isComplete,
+        );
+        bukuBaru[ID_BUKU] = book.id;
+        listElement.append(bukuBaru);
+    }
+
+    buttonSelesai.addEventListener('click', () => {
+        localStorage.setItem('isButtonSelesaiChecked', buttonSelesai.checked);
+        if (buttonSelesai.checked) {
+            document.getElementById(ID_LIST_SUDAH).style.display = 'block';
+        } else {
+            document.getElementById(ID_LIST_SUDAH).style.display = 'none';
+        }
+    });
+
+    buttonBelumSelesai.addEventListener('click', () => {
+        localStorage.setItem(
+            'isButtonBelumSelesaiChecked',
+            buttonBelumSelesai.checked,
+        );
+        if (buttonBelumSelesai.checked) {
+            document.getElementById(ID_LIST_BELUM).style.display = 'block';
+        } else {
+            document.getElementById(ID_LIST_BELUM).style.display = 'none';
+        }
+    });
+
+    if (buttonSelesai.checked) {
+        for (book of list) {
+            if (book.isComplete) {
+                addBookToList(book, listSelesai);
+            }
+        }
+    }
+
+    if (buttonBelumSelesai.checked) {
+        for (book of list) {
+            if (!book.isComplete) {
+                addBookToList(book, listBelumSelesai);
+            }
+        }
+    }
 }
