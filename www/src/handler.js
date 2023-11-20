@@ -92,7 +92,7 @@ function buatTombol(buttonTypeClass, eventListener) {
 function tambahBukuSelesai(elemenBuku) {
     const judul = elemenBuku.querySelector('.judul-buku').innerText;
     const penulis = elemenBuku.querySelector('.penulis-buku').innerText;
-    const tahun = elemenBuku.querySelector('.tahun-buku').innerText;
+    const tahun = parseInt(elemenBuku.querySelector('.tahun-buku').innerText);
     const waktu = elemenBuku.querySelector('.waktu-buku').innerText;
     const listSudahBaca = document.getElementById(ID_LIST_SUDAH);
 
@@ -169,7 +169,7 @@ function buatTombolEdit() {
 function undoBukuSelesai(elemenBuku) {
     const judul = elemenBuku.querySelector('.judul-buku').innerText;
     const penulis = elemenBuku.querySelector('.penulis-buku').innerText;
-    const tahun = elemenBuku.querySelector('.tahun-buku').innerText;
+    const tahun = parseInt(elemenBuku.querySelector('.tahun-buku').innerText);
     const waktu = elemenBuku.querySelector('.waktu-buku').innerText;
     const listBelumBaca = document.getElementById(ID_LIST_BELUM);
 
