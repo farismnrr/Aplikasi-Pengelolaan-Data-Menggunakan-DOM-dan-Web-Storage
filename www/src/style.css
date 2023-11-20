@@ -428,7 +428,7 @@ span .close {
 }
 
 .checklist {
-    background: url('https://storage.googleapis.com/farismnrr-gcloud.appspot.com/checked.svg');
+    background: url('../img/checked.svg');
     background-size: contain;
     width: 20px;
     height: 20px;
@@ -438,12 +438,12 @@ span .close {
 }
 
 .checklist:hover {
-    background: url('https://storage.googleapis.com/farismnrr-gcloud.appspot.com/checked.gif');
+    background: url('../img/checked.gif');
     background-size: contain;
 }
 
 .edit {
-    background: url('https://storage.googleapis.com/farismnrr-gcloud.appspot.com/edit.svg');
+    background: url('../img/edit.svg');
     background-size: contain;
     width: 20px;
     height: 20px;
@@ -453,13 +453,13 @@ span .close {
 }
 
 .edit:hover {
-    background: url('https://storage.googleapis.com/farismnrr-gcloud.appspot.com/edit.gif');
+    background: url('../img/edit.gif');
     background-size: contain;
     width: 20px;
 }
 
 .trash {
-    background: url('https://storage.googleapis.com/farismnrr-gcloud.appspot.com/trash.svg');
+    background: url('../img/trash.svg');
     background-size: contain;
     width: 20px;
     height: 20px;
@@ -469,12 +469,12 @@ span .close {
 }
 
 .trash:hover {
-    background: url('https://storage.googleapis.com/farismnrr-gcloud.appspot.com/trash.gif');
+    background: url('../img/trash.gif');
     background-size: contain;
 }
 
 .undo {
-    background: url('https://storage.googleapis.com/farismnrr-gcloud.appspot.com/restart.svg');
+    background: url('../img/restart.svg');
     background-size: contain;
     width: 20px;
     height: 20px;
@@ -484,7 +484,7 @@ span .close {
 }
 
 .undo:hover {
-    background: url('https://storage.googleapis.com/farismnrr-gcloud.appspot.com/restart.gif');
+    background: url('../img/restart.gif');
     background-size: contain;
 }
 
